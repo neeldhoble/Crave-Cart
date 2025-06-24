@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { getLoyaltyPoints, addLoyaltyPoints } from '../utils/loyalty';
+import axios from 'axios';
 
 const CartPage = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -25,11 +26,14 @@ const CartPage = () => {
       scheduledAt,
     };
 
-    await fetch('http://localhost:5000/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(orderData),
-    });
+    // await fetch('http://localhost:5000/api/orders', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(orderData),
+    // });
+
+    axios.post(`${process.env.REACT_APP_API_URL}/api/order`, orderData)
+
 
     clearCart();
     navigate('/order-success', { state: { scheduledAt } });
