@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-// Sample outlet coordinates
+
 const outlets = [
   { name: 'Sitabuldi', lat: 21.1466, lon: 79.0888 },
   { name: 'Dharampeth', lat: 21.1458, lon: 79.0715 },

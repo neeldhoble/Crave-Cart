@@ -12,7 +12,7 @@ const LoginPage = () => {
   try {
     const { data } = await axios.post('/api/auth/login', { email, password });
     localStorage.setItem('userInfo', JSON.stringify(data));
-    navigate('/menu'); // Redirect to homepage (protected route)
+    navigate('/menu'); 
   } catch (error) {
     console.error('Login failed:', error?.response?.data?.message || error.message);
   }

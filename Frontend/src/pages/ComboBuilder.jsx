@@ -1,4 +1,3 @@
-// src/pages/ComboBuilder.jsx
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 
@@ -48,7 +47,7 @@ const ComboBuilder = () => {
     <div className="p-6 bg-gray-50 min-h-screen">
       <h2 className="text-3xl font-bold text-red-600 text-center mb-6">🍽️ Build Your Combo</h2>
 
-      {/* Main Course Selection */}
+      
       <div className="mb-6">
         <h3 className="text-xl font-semibold mb-2">Main Course</h3>
         <div className="flex gap-4">
@@ -64,7 +63,7 @@ const ComboBuilder = () => {
         </div>
       </div>
 
-      {/* Side Dish Selection */}
+      
       <div className="mb-6">
         <h3 className="text-xl font-semibold mb-2">Side Dish</h3>
         <div className="flex gap-4">
@@ -80,7 +79,7 @@ const ComboBuilder = () => {
         </div>
       </div>
 
-      {/* Drink Selection */}
+      
       <div className="mb-6">
         <h3 className="text-xl font-semibold mb-2">Drink</h3>
         <div className="flex gap-4">
@@ -96,7 +95,6 @@ const ComboBuilder = () => {
         </div>
       </div>
 
-      {/* Final Summary */}
       <div className="text-center mt-6">
         <p className="text-xl font-bold">Total: ₹{total}</p>
         <button

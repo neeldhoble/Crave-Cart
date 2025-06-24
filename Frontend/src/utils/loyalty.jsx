@@ -1,5 +1,3 @@
-// src/utils/loyalty.js
-
 export const getLoyaltyPoints = () => {
   return parseInt(localStorage.getItem('loyaltyPoints') || '0');
 };

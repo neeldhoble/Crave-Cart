@@ -8,7 +8,7 @@ const HomePage = () => {
   
   return (
     <div className="relative min-h-screen text-white">
-      {/* 🔴 Full-page Background Video */}
+      
       <video
         className="fixed top-0 left-0 w-full h-full object-cover -z-10"
         autoPlay
@@ -20,12 +20,12 @@ const HomePage = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* 🔲 Overlay for readability */}
+      
       <div className="absolute inset-0 bg-black bg-opacity-70 -z-10"></div>
 
-      {/* ✅ Page Content */}
+
       <div className="relative z-10">
-        {/* Hero Section */}
+        
         <section className="h-screen flex flex-col justify-center items-center text-center px-6">
           <h1 className="text-5xl font-bold mb-4 drop-shadow-md">Welcome to MyRestaurant</h1>
           <p className="text-xl mb-6 drop-shadow-sm">Delicious meals delivered fresh to your doorstep!</p>
@@ -38,7 +38,7 @@ const HomePage = () => {
 
         <NearestOutlet />
 
-        {/* Features Section */}
+       
         <section className="py-16 px-6 max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-red-300 mb-10">Why Choose Us?</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center text-white">
@@ -60,7 +60,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* How It Works Section */}
+        
         <section className="py-16 px-6 bg-black bg-opacity-50">
           <h2 className="text-3xl font-bold text-center text-red-300 mb-10">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center max-w-6xl mx-auto">
@@ -82,7 +82,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
+        
         <section className="py-16 px-6 text-center">
           <h2 className="text-3xl font-bold mb-4 text-red-300">Hungry Already?</h2>
           <p className="mb-6 text-lg">Get started now and treat yourself to something delicious!</p>
@@ -94,11 +94,11 @@ const HomePage = () => {
         </section>
 
 
-        {/* Contact & Location Section */}
+       
         <section className="py-16 px-6 bg-black bg-opacity-10 backdrop-blur-md text-white">
           <h2 className="text-3xl font-bold text-center text-red-600 mb-10">📍 Visit or Contact Us</h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Contact Info */}
+            
             <div className="space-y-4">
               <p><span className="font-semibold">Address:</span> 123 Foodie Street, Nagpur, Maharashtra 440001</p>
               <p><span className="font-semibold">Phone:</span> +91 98765 43210</p>
@@ -106,7 +106,7 @@ const HomePage = () => {
               <p><span className="font-semibold">Opening Hours:</span> 10:00 AM - 11:00 PM (All days)</p>
             </div>
 
-            {/* Embedded Map */}
+           
             <div className="w-full h-64">
               <iframe
                 title="MyRestaurant Location"
@@ -124,7 +124,7 @@ const HomePage = () => {
         </section>
 
 
-        {/* Footer */}
+        
         <footer className="bg-black bg-opacity-70 text-white text-center py-6">
           <p>&copy; {new Date().getFullYear()} MyRestaurant. All rights reserved.</p>
         </footer>

@@ -20,7 +20,7 @@ const OrderSuccessPage = () => {
         clearInterval(interval);
         return prev;
       });
-    }, 3000); // 3 sec per status
+    }, 3000); 
 
     return () => clearInterval(interval);
   }, []);
