@@ -7,18 +7,45 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const { data } = await axios.post('/api/auth/login', { email, password });
+
+  //     
+  //     localStorage.setItem('userInfo', JSON.stringify(data));
+
+  //     
+  //     if (data.isAdmin) {
+  //       navigate('/admindashboard');
+  //     } else {
+  //       navigate('/menu');
+  //     }
+  //   } catch (error) {
+  //     console.error('Login failed:', error?.response?.data?.message || error.message);
+  //     alert('Invalid credentials');
+  //   }
+  // };
+
+
   const handleLogin = async (e) => {
   e.preventDefault();
   try {
-    // const { data } = await axios.post('/api/auth/login', { email, password });
-    const { data } = await axios.post(axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password }));
-
+    const { data } = await axios.post('/api/auth/login', { email, password });
     localStorage.setItem('userInfo', JSON.stringify(data));
-    navigate('/menu'); 
+
+    // ✅ Redirect based on user type
+    if (data.isAdmin) {
+      navigate('/admin/dashboard');
+    } else {
+      navigate('/menu');
+    }
   } catch (error) {
     console.error('Login failed:', error?.response?.data?.message || error.message);
+    alert('Invalid credentials');
   }
 };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-yellow-100 via-red-100 to-pink-100">

@@ -3,8 +3,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoutes from './routes/AuthRoutes.js';
-
+import orderRoutes from './routes/orderRoutes.js';
 import menuRoutes from './routes/menuRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+
+
 
 dotenv.config();
 
@@ -16,6 +19,8 @@ app.use(express.json());
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/order', orderRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {

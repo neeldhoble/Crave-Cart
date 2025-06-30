@@ -1,7 +1,8 @@
 import User from '../models/User.js';
 import generateToken from '../utils/generateToken.js';
+import bcrypt from 'bcryptjs';
 
-
+// Register Controller
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -14,31 +15,27 @@ export const registerUser = async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
+    isAdmin: user.isAdmin, // ✅ Include this
     token: generateToken(user._id),
   });
 };
 
+// Login Controller
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
-  if (user && (await user.matchPassword(password))) {
+
+  if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
+      isAdmin: user.isAdmin, // ✅ This must be true for admin
       token: generateToken(user._id),
     });
   } else {
     res.status(401).json({ message: 'Invalid email or password' });
   }
 };
-
-
-
-
-
-
-
-

@@ -5,7 +5,6 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
-import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminMenuPage from './pages/admin/AdminMenuPage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 import Navbar from './components/Navbar';
@@ -16,17 +15,27 @@ import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import LandingPage from './pages/LandingPage';
-
-
-
-
-
-
-
+import AdminDashboard from './pages/admin/AdminDashboard';
+import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import AdminLayout from './layouts/AdminLayout';
 
 
 
 function App() {
+
+  
+
+  // const [userInfo, setUserInfo] = useState(null);
+
+// useEffect(() => {
+//   const user = localStorage.getItem('userInfo');
+//   if (user) setUserInfo(JSON.parse(user));
+// }, []);
+
+const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+
   return (
     <div>
       <Navbar/>
@@ -49,9 +58,8 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/menu" element={<AdminMenuPage />} />
-        <Route path="/admin/orders" element={<AdminOrdersPage />} />
+
         <Route path="/cart" element={
               <ProtectedRoute>
                 <CartPage />
@@ -63,6 +71,19 @@ function App() {
             <OrderSuccessPage />
           </ProtectedRoute>
         } />
+
+
+
+
+        <Route
+          path="/admin/dashboard"
+          element={
+            userInfo?.isAdmin ? <AdminDashboard /> : <Navigate to="/admin/dashboard" />
+          }
+        />
+
+
+
         
         
 

@@ -9,6 +9,8 @@ const CartPage = () => {
   const navigate = useNavigate();
   const [scheduledAt, setScheduledAt] = useState('');
 
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
   const totalAmount = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -20,23 +22,50 @@ const CartPage = () => {
       return;
     }
 
+    if (!userInfo || !userInfo.token) {
+      alert('You must be logged in to place an order');
+      navigate('/login');
+      return;
+    }
+
     const orderData = {
       items: cartItems,
       total: totalAmount,
       scheduledAt,
     };
 
-    // await fetch('http://localhost:5000/api/orders', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(orderData),
-    // });
+    try {
+      // await axios.post(
+      //   `${process.env.REACT_APP_API_URL}/api/order`,
+      //   orderData,
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: `Bearer ${userInfo.token}`,
+      //     },
+      //   }
+      // );
 
-    axios.post(`${process.env.REACT_APP_API_URL}/api/order`, orderData)
+            const apiUrl = process.env.REACT_APP_API_URL || '';
+
+          await axios.post(`${apiUrl}/api/order`, orderData, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${userInfo.token}`,
+            },
+          });
+
+          console.log(`${apiUrl}/api/order`);
 
 
-    clearCart();
-    navigate('/order-success', { state: { scheduledAt } });
+      const earned = Math.floor(totalAmount / 100);
+      addLoyaltyPoints(earned);
+      clearCart();
+      navigate('/order-success', { state: { scheduledAt } });
+    } catch (err) {
+      console.error('Order failed:', err.response?.data || err.message);
+      alert('Failed to place order. Please try again.');
+    }
   };
 
   return (
@@ -47,7 +76,6 @@ const CartPage = () => {
         <p className="text-center text-gray-500">Your cart is empty.</p>
       ) : (
         <div className="space-y-4 max-w-2xl mx-auto">
-          {/* Cart Items */}
           {cartItems.map(item => (
             <div
               key={item._id}
@@ -66,7 +94,6 @@ const CartPage = () => {
             </div>
           ))}
 
-          {/* Schedule Time Input */}
           <div className="mt-6">
             <label className="block font-semibold mb-2 text-gray-700">Select Delivery Time:</label>
             <input
@@ -77,7 +104,6 @@ const CartPage = () => {
             />
           </div>
 
-          {/* Total & Actions */}
           <div className="text-right mt-6">
             <p className="text-xl font-bold text-gray-800">Total: ₹{totalAmount}</p>
             <p className="text-md text-gray-600 mb-1">
@@ -89,11 +115,7 @@ const CartPage = () => {
 
             <button
               className="mt-4 px-5 py-2 bg-green-500 text-white rounded hover:bg-green-600 mr-3"
-              onClick={() => {
-                const earned = Math.floor(totalAmount / 100);
-                addLoyaltyPoints(earned);
-                handleOrder(); // includes backend save + navigate
-              }}
+              onClick={handleOrder}
             >
               ✅ Place Order & Earn Points
             </button>
