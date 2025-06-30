@@ -11,6 +11,9 @@ import adminRoutes from './routes/adminRoutes.js';
 
 dotenv.config();
 
+import connectDB from './config/db.js';
+connectDB();
+
 
 const app = express();
 app.use(cors());
